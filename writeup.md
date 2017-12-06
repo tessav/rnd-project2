@@ -82,6 +82,7 @@ Two additional rotations are applied to the gripper frame to correct discrepancy
 ```
  Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
  ```
+<br>
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
