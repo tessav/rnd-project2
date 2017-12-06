@@ -52,27 +52,25 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 
 Individual transformation matrices about each joint:<br>
 ```
-T0_1 = Matrix([[             cos(q1),            -sin(q1),            0,              a0],
-               [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
-               [ sin(q1)*sin(alpha0), cos(q1)*sin(alpha0),  cos(alpha0),  cos(alpha0)*d1],
-               [                   0,                   0,            0,               1]])
-T0_1 = T0_1.subs(s)
+# formula
+def TF_Matrix(alpha, a, d, q):
+        TF = Matrix([
+            [           cos(q),           -sin(q),           0,             a],
+            [sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
+            [sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
+            [                0,                 0,           0,             1]
+        ])
+        return TF
 
-T1_2 = Matrix([[             cos(q2),            -sin(q2),            0,              a1],
-               [ sin(q2)*cos(alpha1), cos(q2)*cos(alpha1), -sin(alpha1), -sin(alpha1)*d2],
-               [ sin(q2)*sin(alpha1), cos(q2)*sin(alpha1),  cos(alpha1),  cos(alpha1)*d2],
-               [                   0,                   0,            0,               1]])
-T1_2 = T1_2.subs(s)
-T2_3 = Matrix(...)
-T2_3=T2_3.subs(s)
-T3_4 = Matrix(...)
-T3_4=T3_4.subs(s)
-T4_5 = Matrix(...)
-T4_5=T4_5.subs(s)
-T5_6 = Matrix(...)
-T5_6=T5_6.subs(s)
-T6_G = Matrix(...)
-T6_G=T6_G.subs(s)
+# Create individual transformation matrices
+T0_1 = TF_Matrix(alpha0, a0, d1, q1).subs(DH_Table)
+T1_2 = TF_Matrix(alpha1, a1, d2, q2).subs(DH_Table)
+T2_3 = TF_Matrix(alpha2, a2, d3, q3).subs(DH_Table)
+T3_4 = TF_Matrix(alpha3, a3, d4, q4).subs(DH_Table)
+T4_5 = TF_Matrix(alpha4, a4, d5, q5).subs(DH_Table)
+T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
+T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
+    
 ```
 The generalized homogeneous transform between base_link and gripper_link is T01_1 * T1_2 * .... * T6_G.
 Two additional rotations are applied to the gripper frame:<br>
