@@ -87,8 +87,8 @@ And here's where you can draw out and show your math for the derivation of your 
 
 ![alt text][image2]
 
-Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
 Joint 1, 2, 3 determine the position of the end effector. <br>
+Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
 
 ### Project Implementation
 
