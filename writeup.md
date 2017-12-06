@@ -54,7 +54,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 
 Individual transformation matrices about each joint:<br>
 ```python
-# formula
+
 def TF_Matrix(alpha, a, d, q):
         TF = Matrix([
             [           cos(q),           -sin(q),           0,             a],
