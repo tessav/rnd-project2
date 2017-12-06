@@ -91,6 +91,25 @@ And here's where you can draw out and show your math for the derivation of your 
 Joint 1, 2, 3 determine the position of the end effector. <br>
 ##### Inverse orientation kinematics problem: 
 Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
+<br>
+```python
+# Calculate joint angles using Geometric IK method
+theta1 = atan2(WC[1], WC[0])
+
+# SSS triangle for theta2 and theta3
+side_a = 1.501
+side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35), 2)
+                + pow((WC[2] - 0.75), 2))
+side_c = 1.25
+
+angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
+angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
+angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
+
+theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
+theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054m
+```
+
 
 ### Project Implementation
 
