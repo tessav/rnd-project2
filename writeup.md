@@ -72,12 +72,13 @@ T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
 T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
     
 ```
-The generalized homogeneous transform between base_link and gripper_link is T01_1 * T1_2 * .... * T6_G.
-Two additional rotations are applied to the gripper frame:<br>
+The generalized homogeneous transform between base_link and gripper_link is:<br>
 ```
- R_z = rot_z(radians(180))
- R_y = rot_y(radians(-90))
- R_corr= simplify(R_z * R_y)
+T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T6_EE
+```
+Two additional rotations are applied to the gripper frame to correct discrepancy:<br>
+```
+ Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
  ```
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
@@ -85,6 +86,9 @@ Two additional rotations are applied to the gripper frame:<br>
 And here's where you can draw out and show your math for the derivation of your theta angles. 
 
 ![alt text][image2]
+
+Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
+Joint 1, 2, 3 determine the position of the end effector. <br>
 
 ### Project Implementation
 
