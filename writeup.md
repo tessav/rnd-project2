@@ -34,7 +34,7 @@ You're reading it!
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
 Schematic of reference frames for kuka arm:<br>
-<img src="https://raw.githubusercontent.com/tessav/rnd-project2/master/misc_images/schematic.png" />
+<img src="https://raw.githubusercontent.com/tessav/rnd-project2/master/misc_images/schematic.png?token=AKybhv4dLjD7HkFYdx8PW0xF1aQoIa-Qks5aMQoswA%3D%3D" />
 
 DH parameters an be derived from the urdf file:<br>
 
