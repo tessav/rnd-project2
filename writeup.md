@@ -108,7 +108,7 @@ theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054
 ```
 
 ##### Inverse orientation kinematics problem: 
-Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
+Joint 4, 5, 6 determine the orientation of the end effector. <br> 
 
 ```python
 # Euler angles from rotation matrix
