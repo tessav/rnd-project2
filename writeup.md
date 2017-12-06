@@ -51,7 +51,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
 Individual transformation matrices about each joint:<br>
-```
+```python
 # formula
 def TF_Matrix(alpha, a, d, q):
         TF = Matrix([
