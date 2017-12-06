@@ -82,13 +82,10 @@ Two additional rotations are applied to the gripper frame to correct discrepancy
  ```
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
-
-And here's where you can draw out and show your math for the derivation of your theta angles. 
-
-![alt text][image2]
-
+<br>
 ##### Inverse position kinematics problem: 
 Joint 1, 2, 3 determine the position of the end effector. <br>
+
 ```python
 # Calculate joint angles using Geometric IK method
 theta1 = atan2(WC[1], WC[0])
@@ -107,8 +104,10 @@ theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[
 theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054m
 ```
 <br>
+
 ##### Inverse orientation kinematics problem: 
 Joint 4, 5, 6 forms a spherical wrist that determines the orientation of the end effector. <br> 
+
 ```python
 # Euler angles from rotation matrix
 theta4 = atan2(R3_6[2,2], -R3_6[0,2])
