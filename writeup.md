@@ -83,6 +83,7 @@ Two additional rotations are applied to the gripper frame to correct discrepancy
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 <br>
+
 ##### Inverse position kinematics problem: 
 Joint 1, 2, 3 determine the position of the end effector. <br>
 
