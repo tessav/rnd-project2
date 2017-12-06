@@ -129,10 +129,10 @@ def handle_calculate_IK(req, test = 'no'):
 
             # 0. Useful Constants
             ee_length = d7
-            ee_length = ee_length.subs(s)
+            ee_length = ee_length.subs(DH_Table)
             # a = l2
             l2_3 = a2
-            l2_3 = l2_3.subs(s)
+            l2_3 = l2_3.subs(DH_Table)
             # b = l3 + l4 w/ adjustment
             # labeled as d in writeup
             l3_4 = 0.96 # from URDF file
@@ -140,7 +140,7 @@ def handle_calculate_IK(req, test = 'no'):
             l4_5 = 0.54 # from URDF file
             # labeled as a3 in writeup
             l3_4_offset = abs(a3)
-            l3_4_offset = l3_4_offset.subs(s)
+            l3_4_offset = l3_4_offset.subs(DH_Table)
             # labeled as B in writeup
             l3_4_angle = pi - asin(l3_4_offset / l3_4)
             # Cosine rule - labeled as b in writeup
@@ -171,11 +171,11 @@ def handle_calculate_IK(req, test = 'no'):
 
             # 4. theta2 calc
             J2_x = a1 * cos(theta1)
-            J2_x = J2_x.subs(s)
+            J2_x = J2_x.subs(DH_Table)
             J2_y = a1 * sin(theta1)
-            J2_y = J2_y.subs(s)
+            J2_y = J2_y.subs(DH_Table)
             J2_z = d1
-            J2_z = J2_z.subs(s)
+            J2_z = J2_z.subs(DH_Table)
             J5_x = w_c[0,0]
             J5_y = w_c[1,0]
             J5_z = w_c[2,0]
