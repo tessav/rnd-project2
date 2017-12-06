@@ -97,7 +97,7 @@ def handle_calculate_IK(req, test = 'no'):
                       [sin(pi),  cos(pi), 0, 0],
                       [      0,        0, 1, 0],
                       [      0,        0, 0, 1]])
-	
+
         # 90 degree y-axis rotation
         R_y = Matrix([[ cos(-pi/2), 0, sin(-pi/2), 0],
                       [          0, 1,          0, 0],
@@ -198,7 +198,7 @@ def handle_calculate_IK(req, test = 'no'):
 
             # 6. Find R3_6 from orientation data
             R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
-		R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
+            R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
 
             # Correct orientation between DH convention and URDF
             R_total_adjust = simplify(R_total * rot_z(-pi/2) * rot_y(-pi/2))
