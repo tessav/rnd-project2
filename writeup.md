@@ -48,10 +48,9 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 5->6 | -pi/2 | 0 | 0 | q6
 6->EE | 0 | 0 | 0.303 | 0
 
-![alt text][image1]
-
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
-#### Homogeneous Transforms
+
+Individual transformation matrices about each joint:<br><br>
 ```
 T0_1 = Matrix([[             cos(q1),            -sin(q1),            0,              a0],
                [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
