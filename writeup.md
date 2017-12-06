@@ -50,7 +50,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-Individual transformation matrices about each joint:<br><br>
+Individual transformation matrices about each joint:<br>
 ```
 T0_1 = Matrix([[             cos(q1),            -sin(q1),            0,              a0],
                [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
@@ -74,7 +74,13 @@ T5_6=T5_6.subs(s)
 T6_G = Matrix(...)
 T6_G=T6_G.subs(s)
 ```
-
+The generalized homogeneous transform between base_link and gripper_link is T01_1 * T1_2 * .... * T6_G.
+Two additional rotations are applied to the gripper frame:<br>
+```
+ R_z = rot_z(radians(180))
+ R_y = rot_y(radians(-90))
+ R_corr= simplify(R_z * R_y)
+ ```
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
