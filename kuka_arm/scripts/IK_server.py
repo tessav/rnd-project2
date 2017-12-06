@@ -89,20 +89,16 @@ def handle_calculate_IK(req, test = 'no'):
         T5_6 = TF_Matrix(alpha5, a5, d6, q6).subs(DH_Table)
         T6_EE = TF_Matrix(alpha6, a6, d7, q7).subs(DH_Table)
 
-        T0_2 = simplify(T0_1 * T1_2)
-        T0_3 = simplify(T0_2 * T2_3)
-        T0_4 = simplify(T0_3 * T3_4)
-        T0_5 = simplify(T0_4 * T4_5)
-        T0_6 = simplify(T0_5 * T5_6)
-        T0_EE = simplify(T0_6 * T6_EE)
+        T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T6_EE
 
-        # Correct orientation of gripper link in URDF vs. DH convention
-        # 180 degree rotation about the z-axis
+        # Correct orientation of gripper link
+        # 180 degree z-axis rotation
         R_z = Matrix([[cos(pi), -sin(pi), 0, 0],
                       [sin(pi),  cos(pi), 0, 0],
                       [      0,        0, 1, 0],
                       [      0,        0, 0, 1]])
-        # 90 degree rotation about the y-axis
+	
+        # 90 degree y-axis rotation
         R_y = Matrix([[ cos(-pi/2), 0, sin(-pi/2), 0],
                       [          0, 1,          0, 0],
                       [-sin(-pi/2), 0, cos(-pi/2), 0],
@@ -110,7 +106,7 @@ def handle_calculate_IK(req, test = 'no'):
         R_corr = simplify(R_z * R_y)
 
         # Total transform with gripper orientation corrected
-        T_total = simplify(T0_G * R_corr)
+        T_total = simplify(T0_EE * R_corr)
 
 
         for x in xrange(0, len(req.poses)):
