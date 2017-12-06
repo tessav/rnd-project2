@@ -33,7 +33,7 @@ You're reading it!
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
 
-Schematic of reference frames for kuka arm:<br>
+Schematic of reference frames for kuka arm:<br><br>
 <img src="https://raw.githubusercontent.com/tessav/rnd-project2/master/misc_images/schematic.png?token=AKybhv4dLjD7HkFYdx8PW0xF1aQoIa-Qks5aMQoswA%3D%3D" />
 
 DH parameters an be derived from the urdf file:<br>
@@ -51,7 +51,30 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 ![alt text][image1]
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
+#### Homogeneous Transforms
+```
+T0_1 = Matrix([[             cos(q1),            -sin(q1),            0,              a0],
+               [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
+               [ sin(q1)*sin(alpha0), cos(q1)*sin(alpha0),  cos(alpha0),  cos(alpha0)*d1],
+               [                   0,                   0,            0,               1]])
+T0_1 = T0_1.subs(s)
 
+T1_2 = Matrix([[             cos(q2),            -sin(q2),            0,              a1],
+               [ sin(q2)*cos(alpha1), cos(q2)*cos(alpha1), -sin(alpha1), -sin(alpha1)*d2],
+               [ sin(q2)*sin(alpha1), cos(q2)*sin(alpha1),  cos(alpha1),  cos(alpha1)*d2],
+               [                   0,                   0,            0,               1]])
+T1_2 = T1_2.subs(s)
+T2_3 = Matrix(...)
+T2_3=T2_3.subs(s)
+T3_4 = Matrix(...)
+T3_4=T3_4.subs(s)
+T4_5 = Matrix(...)
+T4_5=T4_5.subs(s)
+T5_6 = Matrix(...)
+T5_6=T5_6.subs(s)
+T6_G = Matrix(...)
+T6_G=T6_G.subs(s)
+```
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
