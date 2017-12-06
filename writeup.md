@@ -38,7 +38,7 @@ DH parameters an be derived from urdf file:<br>
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
 0->1 | 0 | 0 | 0.75 | q1 
-1->2 | - pi/2 | 0.35 | 0 | -pi/2 + q2
+1->2 | -pi/2 | 0.35 | 0 | -pi/2 + q2
 2->3 | 0 | 1.25 | 0 | q3
 3->4 |  -pi/2 | -0.054 | 1.50 | q4
 4->5 | pi/2 | 0 | 0 | q5
