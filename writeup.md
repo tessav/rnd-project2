@@ -38,17 +38,13 @@ Schematic of reference frames for kuka arm:<br><br>
 
 ### Definitions of DH parameters:
 
-#### Twist angle: alpha(i-1)
-angle between axis Z(i-1) and Z(i) measured about axis X(i-1)
+<b>Twist angle: alpha(i-1)</b> - angle between axis Z(i-1) and Z(i) measured about axis X(i-1)
 
-#### Link length: a
-distance from axis Z(i-1) to Z(i) measured along axis X(i-1)
+<b>Link length: a</b> - distance from axis Z(i-1) to Z(i) measured along axis X(i-1)
 
-#### Link offset: d
-distance from axis X(i-1) to X(i) measured along axis Z(i)
+<b>Link offset: d</b> - distance from axis X(i-1) to X(i) measured along axis Z(i)
 
-#### Joint angle: theta
-angle between axis X(i-1) and X(i) measured about axis Z(i)
+<b>Joint angle: theta</b> - angle between axis X(i-1) and X(i) measured about axis Z(i)
 
 <br>
 From URDF file, relative locations from joint i to i-1:
