@@ -217,9 +217,9 @@ def handle_calculate_IK(req, test = 'no'):
             # Populate response for the IK request
 	    joint_trajectory_point.positions = [theta1, theta2, theta3, theta4, theta5, theta6]
 	    joint_trajectory_list.append(joint_trajectory_point)
-
-            rospy.loginfo("length of Joint Trajectory List: %s" % len(joint_trajectory_list))
-            return CalculateIKResponse(joint_trajectory_list)
+	
+	rospy.loginfo("length of Joint Trajectory List: %s" % len(joint_trajectory_list))
+        return CalculateIKResponse(joint_trajectory_list)
 
 
 def IK_server():
