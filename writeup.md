@@ -36,7 +36,7 @@ You're reading it!
 Schematic of reference frames for kuka arm:<br><br>
 <img src="https://raw.githubusercontent.com/shbosh/rnd-project2/master/misc_images/schematic.png" />
 
-### Definitions of DH parameters:
+#### Definitions of DH parameters
 
 <b>Twist angle: alpha(i-1)</b> - angle between axis Z(i-1) and Z(i) measured about axis X(i-1)
 
