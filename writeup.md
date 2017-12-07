@@ -50,9 +50,8 @@ Schematic of reference frames for kuka arm:<br><br>
 
 From URDF file, relative locations:
 
-Joint | x-dist | y-dist	| z-dist | axis
+Joint | x | y	| z | axis
 --- | --- | --- | --- | ---
-0 | 0 | 0 | 0 |
 1 | 0 | 0 | 0.33 | z
 2 | 0.35 | 0 | 0.42 | y
 3 | 0 | 0| 1.25 | y
@@ -61,21 +60,6 @@ Joint | x-dist | y-dist	| z-dist | axis
 6 | 0.193 | 0	| 0 | x
 G | 0.11 | 0 | 0 | y
 
-In transforming this data into D-H values, the following rules were followed:
-
-In describing reference frames for each joint, the z-axis is along the joint rotational axis. (See figure below)
-common normals should be identified between joint reference frames.
-Where possible parameters should ideally be zero.
-Where links are coincident with joint axes, the sum of the link lengths is to be assigned to the link furthest from the last perpendicular joint axis.
-
-J0 = (0, 0, 0)
-J1 = (0, 0, 0.33)
-J2 = (0.35, 0, 0.42)
-J3 = (0, 0, 1.25)
-J4 = (0.96, 0, -0.054)
-J5 = (0.54, 0, 0)
-J6 = (0.193, 0, 0)
-JG = (0.11, 0, 0)
 
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
@@ -87,6 +71,8 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 5->6 | -pi/2 | 0 | 0 | q6
 6->EE | 0 | 0 | 0.303 | 0
 
+#### Example:
+- a1 is distance between Z1 and Z2 along the x-axis -> In URDF, joint 1 and joint 2 are 0.35m apart.
 <br>
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
