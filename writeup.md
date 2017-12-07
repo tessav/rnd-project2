@@ -36,7 +36,7 @@ You're reading it!
 Schematic of reference frames for kuka arm:<br><br>
 <img src="https://raw.githubusercontent.com/shbosh/rnd-project2/master/misc_images/schematic.png" />
 
-### Definitions of DH parameters
+#### Definitions of DH parameters
 
 <b>Twist angle, alpha(i-1):</b> angle between axis Z(i-1) and Z(i) measured about axis X(i-1)
 
@@ -46,7 +46,7 @@ Schematic of reference frames for kuka arm:<br><br>
 
 <b>Joint angle, theta:</b> angle between axis X(i-1) and X(i) measured about axis Z(i)
 
-### Relative location of joints (URDF File)
+#### Relative location of joints (URDF File)
 
 Joint | x | y	| z | axis
 --- | --- | --- | --- | ---
@@ -58,7 +58,7 @@ Joint | x | y	| z | axis
 6 | 0.193 | 0	| 0 | x
 G | 0.11 | 0 | 0 | y
 
-### DH Matrix
+#### DH Matrix
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
 0->1 | 0 | 0 | 0.75 | q1 
@@ -69,7 +69,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 5->6 | -pi/2 | 0 | 0 | q6
 6->EE | 0 | 0 | 0.303 | 0
 
-#### Example:
+##### Example:
 - a1 is distance between Z1 and Z2 along the x-axis -> In URDF, joint 1 and joint 2 are 0.35m apart.
 <br>
 
