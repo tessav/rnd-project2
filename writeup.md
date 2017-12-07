@@ -46,9 +46,7 @@ Schematic of reference frames for kuka arm:<br><br>
 
 <b>Joint angle, theta:</b> angle between axis X(i-1) and X(i) measured about axis Z(i)
 
-<br>
-
-### URDF File: Relative Location of Joints
+#### Relative Location of Joints (URDF File)
 
 Joint | x | y	| z | axis
 --- | --- | --- | --- | ---
@@ -60,7 +58,7 @@ Joint | x | y	| z | axis
 6 | 0.193 | 0	| 0 | x
 G | 0.11 | 0 | 0 | y
 
-### DH Matrix
+#### DH Matrix
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
 0->1 | 0 | 0 | 0.75 | q1 
