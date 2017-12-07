@@ -77,7 +77,7 @@ def handle_calculate_IK(req, test = 'no'):
                 alpha6:     0, a6:      0, d7: 0.303, q7:       0
             }
 
-        # Define Modified DH Transformation matrix
+        # define Modified DH Transformation matrix
             # Total transform defined after individual transforms
 
         # Create individual transformation matrices
@@ -114,43 +114,37 @@ def handle_calculate_IK(req, test = 'no'):
             # IK code starts here
             joint_trajectory_point = JointTrajectoryPoint()
 
-            # Extract end-effector position and orientation from request
-	    # px,py,pz = end-effector position
-	    # roll, pitch, yaw = end-effector orientation
+            # Extract end-effector position from request
             px = req.poses[x].position.x
             py = req.poses[x].position.y
             pz = req.poses[x].position.z
-
+	
+	    # Extract end-effector orientation from request
             (roll, pitch, yaw) = tf.transformations.euler_from_quaternion(
                 [req.poses[x].orientation.x, req.poses[x].orientation.y,
                     req.poses[x].orientation.z, req.poses[x].orientation.w])
 
             # Calculate joint angles using Geometric IK method
-
-            # 0. Useful Constants
+		
             ee_length = d7
             ee_length = ee_length.subs(DH_Table)
             # a = l2
             l2_3 = a2
             l2_3 = l2_3.subs(DH_Table)
             # b = l3 + l4 w/ adjustment
-            # labeled as d in writeup
             l3_4 = 0.96 # from URDF file
-            # labeled as e in writeup
             l4_5 = 0.54 # from URDF file
-            # labeled as a3 in writeup
             l3_4_offset = abs(a3)
             l3_4_offset = l3_4_offset.subs(DH_Table)
-            # labeled as B in writeup
             l3_4_angle = pi - asin(l3_4_offset / l3_4)
-            # Cosine rule - labeled as b in writeup
-            # b = sqrt(d^2 + e^2 - 2de * cos(B)
+	
+            # Cosine rule: b = sqrt(d^2 + e^2 - 2de * cos(B))
             dist3_5 = sqrt(l3_4**2 + l4_5**2 - 2*l3_4*l4_5*cos(l3_4_angle))
 
-            # 1. Find total rotation matrix from roll-pitch-yaw data
+            # Total rotation matrix from roll-pitch-yaw data
             R_total = simplify(rot_z(yaw) * rot_y(pitch) * rot_x(roll))
 
-            # 2. Find wrist center position using the end effector position and orientation
+            # Find wrist center position using end effector position and orientation
                 # d6 = 0
                 # wx = px - (d6 + l) * nx
                 # wy = py - (d6 + l) * ny
@@ -166,10 +160,10 @@ def handle_calculate_IK(req, test = 'no'):
 
             w_c = ee_position - R_total * ee_adj
 
-            # 3. theta1 calc
+            # theta1 calculation
             theta1 = atan2(w_c[1,0], w_c[0,0])
 
-            # 4. theta2 calc
+            # theta2 calculation
             J2_x = a1 * cos(theta1)
             J2_x = J2_x.subs(DH_Table)
             J2_y = a1 * sin(theta1)
@@ -179,18 +173,15 @@ def handle_calculate_IK(req, test = 'no'):
             J5_x = w_c[0,0]
             J5_y = w_c[1,0]
             J5_z = w_c[2,0]
-            # labeled g in writeup
             J5_2_z = J5_z - J2_z
 
-            # labeled c in writeup
             dist_J2_J5 = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2 + (J5_z - J2_z)**2)
-            # labeled f in writeup
             dist_J2_J5_xy = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2)
 
             # theta2 = pi/2 - beta - delta
             theta2 = pi/2 - (acos((dist3_5**2 - l2_3**2 - dist_J2_J5**2)/(-2*l2_3*dist_J2_J5))) - atan2(J5_2_z, dist_J2_J5_xy)
 
-            # 5. theta3 calc
+            # theta3 calculation
             # theta3 = pi/2 - delta - gamma
             # delta = asin(a3/b)
             # gamma = acos((c^2 - a^2 - b^2)/(-2ab))
@@ -200,32 +191,21 @@ def handle_calculate_IK(req, test = 'no'):
             R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
             R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
 
-            # Correct orientation between DH convention and URDF
+            # Correct orientation
             R_total_adjust = simplify(R_total * rot_z(-pi/2) * rot_y(-pi/2))
             # for a valid rotation matrix the transpose is == to the inverse
             R3_6 = simplify(R0_3.T * R_total_adjust)
 
-            # 7. Find alpha, beta, gamma euler angles as done in lesson 2 part 8.
-
-            # Method using euler_from_matrix assuming a yzy rotation rather than an xyz rotation
+            # theta4,5,6 calculation
             alpha, beta, gamma = tf.transformations.euler_from_matrix(R3_6.tolist(), 'ryzy')
             theta4 = alpha
             theta5 = beta
             theta6 = gamma
 
             # Populate response for the IK request
-            # In the next line replace theta1,theta2...,theta6 by your joint angle variables
 	    joint_trajectory_point.positions = [theta1, theta2, theta3, theta4, theta5, theta6]
 	    joint_trajectory_list.append(joint_trajectory_point)
 
-        # Assemble variables if testing
-        if test == 'yes':
-            test_variables = {'px' : px, 'py' : py, 'pz' : pz, 'roll' : roll, 'pitch' : pitch, 'yaw' : yaw,
-                              'wcx' : wx, 'wcy' : wy, 'wcz' : wz, 'theta1' : theta1, 'theta2' : theta2,
-                              'theta3' : theta3, 'theta4' : theta4, 'theta5' : theta5, 'theta6' : theta6 }
-
-            return test_variables
-        else:
             rospy.loginfo("length of Joint Trajectory List: %s" % len(joint_trajectory_list))
             return CalculateIKResponse(joint_trajectory_list)
 
