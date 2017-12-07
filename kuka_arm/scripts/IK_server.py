@@ -163,41 +163,41 @@ def handle_calculate_IK(req, test = 'no'):
             # theta1 calculation
             theta1 = atan2(WC[1,0], WC[0,0])
 	
-# 	    # SSS triangle for theta2 and theta3
-# 	    side_a = 1.501
-# 	    side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
-# 	    side_c = 1.25
+	    # SSS triangle for theta2 and theta3
+	    side_a = 1.501
+	    side_b = sqrt(pow((sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
+	    side_c = 1.25
 
-# 	    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
-# 	    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
-#             angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
+	    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
+	    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
+            angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
 
-# 	    theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
-# 	    theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054m
+	    theta2 = pi / 2 - angle_a - atan2(WC[2] - 0.75, sqrt(WC[0] * WC[0] + WC[1] * WC[1]) - 0.35)
+	    theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054m
 
-            # theta2 calculation
-            J2_x = a1 * cos(theta1)
-            J2_x = J2_x.subs(DH_Table)
-            J2_y = a1 * sin(theta1)
-            J2_y = J2_y.subs(DH_Table)
-            J2_z = d1
-            J2_z = J2_z.subs(DH_Table)
-            J5_x = w_c[0,0]
-            J5_y = w_c[1,0]
-            J5_z = w_c[2,0]
-            J5_2_z = J5_z - J2_z
+#             # theta2 calculation
+#             J2_x = a1 * cos(theta1)
+#             J2_x = J2_x.subs(DH_Table)
+#             J2_y = a1 * sin(theta1)
+#             J2_y = J2_y.subs(DH_Table)
+#             J2_z = d1
+#             J2_z = J2_z.subs(DH_Table)
+#             J5_x = w_c[0,0]
+#             J5_y = w_c[1,0]
+#             J5_z = w_c[2,0]
+#             J5_2_z = J5_z - J2_z
 
-            dist_J2_J5 = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2 + (J5_z - J2_z)**2)
-            dist_J2_J5_xy = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2)
+#             dist_J2_J5 = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2 + (J5_z - J2_z)**2)
+#             dist_J2_J5_xy = sqrt((J5_x - J2_x)**2 + (J5_y - J2_y)**2)
 
-            # theta2 = pi/2 - beta - delta
-            theta2 = pi/2 - (acos((dist3_5**2 - l2_3**2 - dist_J2_J5**2)/(-2*l2_3*dist_J2_J5))) - atan2(J5_2_z, dist_J2_J5_xy)
+#             # theta2 = pi/2 - beta - delta
+#             theta2 = pi/2 - (acos((dist3_5**2 - l2_3**2 - dist_J2_J5**2)/(-2*l2_3*dist_J2_J5))) - atan2(J5_2_z, dist_J2_J5_xy)
 
-            # theta3 calculation
-            # theta3 = pi/2 - delta - gamma
-            # delta = asin(a3/b)
-            # gamma = acos((c^2 - a^2 - b^2)/(-2ab))
-            theta3 = pi/2 - asin(l3_4_offset/dist3_5) - acos((dist_J2_J5**2 - l2_3**2 - dist3_5**2)/(-2*l2_3*dist3_5))
+#             # theta3 calculation
+#             # theta3 = pi/2 - delta - gamma
+#             # delta = asin(a3/b)
+#             # gamma = acos((c^2 - a^2 - b^2)/(-2ab))
+#             theta3 = pi/2 - asin(l3_4_offset/dist3_5) - acos((dist_J2_J5**2 - l2_3**2 - dist3_5**2)/(-2*l2_3*dist3_5))
 
             # 6. Find R3_6 from orientation data
             R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
