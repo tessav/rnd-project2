@@ -36,6 +36,7 @@ You're reading it!
 Schematic of reference frames for kuka arm:<br><br>
 <img src="https://raw.githubusercontent.com/shbosh/rnd-project2/master/misc_images/schematic.png" />
 <br>
+
 #### Definitions of DH parameters
 
 <b>Twist angle, alpha(i-1):</b> angle between axis Z(i-1) and Z(i) measured about axis X(i-1)
@@ -46,6 +47,7 @@ Schematic of reference frames for kuka arm:<br><br>
 
 <b>Joint angle, theta:</b> angle between axis X(i-1) and X(i) measured about axis Z(i)
 <br>
+
 #### Relative location of joints (URDF File)
 
 Joint | x | y	| z | axis
@@ -58,6 +60,7 @@ Joint | x | y	| z | axis
 6 | 0.193 | 0	| 0 | x
 G | 0.11 | 0 | 0 | y
 <br>
+
 #### DH Matrix
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
@@ -69,10 +72,12 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 5->6 | -pi/2 | 0 | 0 | q6
 6->EE | 0 | 0 | 0.303 | 0
 <br>
+
 ##### Example:
 - a1 is distance between Z1 and Z2 along the x-axis -> In URDF, joint 1 and joint 2 are 0.35m apart.
 <br>
 <br>
+
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
 Individual transformation matrices about each joint:<br>
