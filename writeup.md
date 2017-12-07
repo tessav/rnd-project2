@@ -47,7 +47,26 @@ Schematic of reference frames for kuka arm:<br><br>
 <b>Joint angle, theta:</b> angle between axis X(i-1) and X(i) measured about axis Z(i)
 
 <br>
-From URDF file, relative locations from joint i to i-1:
+
+From URDF file, relative locations:
+
+Joint | x-dist | y-dist	| z-dist | axis
+--- | --- | --- | --- | ---
+0 | 0 | 0 | 0 |
+1 | 0 | 0 | 0.33 | z
+2 | 0.35 | 0 | 0.42 | y
+3 | 0 | 0| 1.25 | y
+4 | 0.96 | 0 | -0.54 | x
+5 | 0.54 | 0 | 0 | y
+6 | 0.193 | 0	| 0 | x
+G | 0.11 | 0 | 0 | y
+
+In transforming this data into D-H values, the following rules were followed:
+
+In describing reference frames for each joint, the z-axis is along the joint rotational axis. (See figure below)
+common normals should be identified between joint reference frames.
+Where possible parameters should ideally be zero.
+Where links are coincident with joint axes, the sum of the link lengths is to be assigned to the link furthest from the last perpendicular joint axis.
 
 J0 = (0, 0, 0)
 J1 = (0, 0, 0.33)
