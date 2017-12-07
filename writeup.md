@@ -72,7 +72,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 
 ##### Example:
 - a1 is distance between Z1 and Z2 along the x-axis -> In URDF, joint 1 and joint 2 are 0.35m apart.
-
+<br>
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
