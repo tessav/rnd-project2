@@ -19,6 +19,7 @@
 [image1]: ./misc_images/misc1.png
 [image2]: ./misc_images/ik.png
 [image3]: ./misc_images/misc2.png
+[image4]: ./misc_images/calc.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -107,10 +108,11 @@ Two additional rotations are applied to the gripper frame to correct discrepancy
 <br>
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
-![image2]
 
-##### Inverse position kinematics problem: 
+##### Inverse position kinematics problem:
 Joint 1, 2, 3 determine the position of the end effector. <br>
+![image2]
+![image4]
 
 ```python
 # Calculate joint angles using Geometric IK method
@@ -131,7 +133,8 @@ theta3 = pi / 2 - (angle_b + 0.036) # 0.036 accounts for sag in link 4 of -0.054
 ```
 
 ##### Inverse orientation kinematics problem: 
-Joint 4, 5, 6 determine the orientation of the end effector. <br> 
+Joint 4, 5, 6 determine the orientation of the end effector. <br>
+Theta4,5 and 6 can be found by transforming the orientation into euler angles using theta1,2 and 3. 
 
 ```python
 # Euler angles from rotation matrix
